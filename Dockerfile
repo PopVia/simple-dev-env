@@ -67,6 +67,8 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | b
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
+RUN npm i -g nodemon
+
 RUN echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'  >> /home/devuser/.bashrc
 
 RUN echo "" >> /home/devuser/.bashrc
@@ -74,8 +76,6 @@ RUN echo 'echo "devuser password is devuser"' >> /home/devuser/.bashrc
 RUN echo 'echo "=========================="' >> /home/devuser/.bashrc
 RUN echo 'echo "nvm is installed for node version manager, sdkman is installed for other languages if needed"' >> /home/devuser/.bashrc
 RUN echo "" >> /home/devuser/.bashrc
-
-RUN echo 'python3 /home/devuser/bin/artifactory-auth' >> /home/devuser/.bashrc
 
 #sdkman doing this last, not sure if it is required but it comments bashrc its pieces need to be at end
 RUN curl -s "https://get.sdkman.io" | bash
